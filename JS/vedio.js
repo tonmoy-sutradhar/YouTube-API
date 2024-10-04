@@ -1,6 +1,13 @@
 // console.log("js file added");
-// 1. fetch, load and show categories on html
+function time(time) {
+  const hour = parseInt(time / 3600);
+  let sec = parseInt(time % 3600);
+  const min = parseInt(sec / 60);
+  sec = sec % 60;
+  return `${hour} hour ${min} min ${sec} second ago`;
+}
 
+// 1. fetch, load and show categories on html
 // create loadCategories
 const loadCategories = () => {
   // console.log("loadCategories function load.");
@@ -17,7 +24,7 @@ const displayCategories = (categories) => {
   //add data in html
   // console.log(data);
   categories.forEach((item) => {
-    console.log(item);
+    // console.log(item);
 
     // create a button
     const button = document.createElement("button");
@@ -62,7 +69,7 @@ const displayVideos = (videos) => {
   const videoContainer = document.getElementById("videos");
 
   videos.forEach((video) => {
-    console.log(video);
+    // console.log(video);
 
     const card = document.createElement("div");
     card.classList = "card card-compact";
@@ -75,7 +82,9 @@ const displayVideos = (videos) => {
       ${
         video.others.posted_date?.length == 0
           ? ""
-          : `<span class = "absolute right-2 bottom-2 text-white bg-black rounded p-1"> ${video.others.posted_date} </span>`
+          : `<span class = "absolute right-2 bottom-2 text-white text-xs bg-black rounded p-1"> ${time(
+              video.others.posted_date
+            )} </span>`
       }
       
   </figure>

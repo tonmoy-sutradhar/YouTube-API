@@ -12,3 +12,12 @@
 // console.log(
 //   `${isVerified === true ? "User is verified." : "user is not verified"}`
 // );
+
+function time(time) {
+  const hour = parseInt(time / 3600);
+  let sec = parseInt(time % 3600);
+  const min = parseInt(sec / 60);
+  sec = sec % 60;
+  return `${hour} hour ${min} min ${sec} second ago.`;
+}
+console.log(time(800));
