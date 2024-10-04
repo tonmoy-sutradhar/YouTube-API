@@ -17,26 +17,33 @@ const loadCategories = () => {
     .catch((err) => console.log(err));
 };
 
+const loadCategoryVideos = (id) => {
+  // alert(id);
+  fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
+    .then((res) => res.json())
+    .then((data) => displayVideos(data.category))
+    .catch((err) => console.log(err));
+};
+
 // create displayCategories
 const displayCategories = (categories) => {
   const categoryContainer = document.getElementById("categories");
-  // console.log("loadCategories function load.");
-  //add data in html
-  // console.log(data);
+
   categories.forEach((item) => {
-    // console.log(item);
+    console.log(item);
 
     // create a button
-    const button = document.createElement("button");
-    button.classList = "btn";
-    button.innerText = item.category;
+    const buttonContainer = document.createElement("div");
+    buttonContainer.innerHTML = `
+    <button onclick="loadCategoryVideos(${item.category_id})" class="btn"> ${item.category} </button>
+    `;
 
     // add button to category container ----->>
-    categoryContainer.append(button);
+    categoryContainer.append(buttonContainer);
   });
 };
 
-// create loadvideos
+// create load-videos
 const loadVideos = () => {
   // console.log("loadCategories function load.");
   fetch("https://openapi.programming-hero.com/api/phero-tube/videos")
@@ -45,31 +52,12 @@ const loadVideos = () => {
     .catch((err) => console.log(err));
 };
 
-// const cardDemo = {
-//   category_id: "1001",
-//   video_id: "aaaa",
-//   thumbnail: "https://i.ibb.co/L1b6xSq/shape.jpg",
-//   title: "Shape of You",
-//   authors: [
-//     {
-//       profile_picture: "https://i.ibb.co/D9wWRM6/olivia.jpg",
-//       profile_name: "Olivia Mitchell",
-//       verified: "",
-//     },
-//   ],
-//   others: {
-//     views: "100K",
-//     posted_date: "16278",
-//   },
-//   description:
-//     "Dive into the rhythm of 'Shape of You,' a captivating track that blends pop sensibilities with vibrant beats. Created by Olivia Mitchell, this song has already gained 100K views since its release. With its infectious melody and heartfelt lyrics, 'Shape of You' is perfect for fans looking for an uplifting musical experience. Let the music take over as Olivia's vocal prowess and unique style create a memorable listening journey.",
-// };
-
 const displayVideos = (videos) => {
   const videoContainer = document.getElementById("videos");
+  videoContainer.innerHTML = "";
 
   videos.forEach((video) => {
-    // console.log(video);
+    console.log(video);
 
     const card = document.createElement("div");
     card.classList = "card card-compact";
